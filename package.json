@@ -1,0 +1,12 @@
+{
+  "name": "btc-unspendable-bot",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "auth:x": "node src/authorize.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

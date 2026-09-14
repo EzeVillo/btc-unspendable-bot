@@ -1,0 +1,51 @@
+name: Publish daily Bitcoin unspendable snapshot
+run-name: Daily snapshot · ${{ inputs.trigger || 'manual' }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: Source that requested this run
+        required: false
+        default: manual
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: btc-unspendable-daily
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-slim
+    timeout-minutes: 5
+    steps:
+      - name: Check out the default branch
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Publish snapshot
+        env:
+          SOURCE_URL: ${{ secrets.SOURCE_URL }}
+          GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
+          X_CLIENT_ID: ${{ secrets.X_CLIENT_ID }}
+          X_CLIENT_SECRET: ${{ secrets.X_CLIENT_SECRET }}
+          X_REFRESH_TOKEN: ${{ secrets.X_REFRESH_TOKEN }}
+        run: node src/run.mjs
+
+      - name: Commit the successful snapshot
+        run: |
+          if git diff --quiet -- data/latest.json; then
+            exit 0
+          fi
+          git config user.name "btc-unspendable-bot[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/latest.json
+          git commit -m "data: snapshot $(date -u +%F)"
+          git push

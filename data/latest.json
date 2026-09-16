@@ -1,3 +1,9 @@
 {
-  "last_snapshot": null
+  "last_snapshot": {
+    "cutoff_utc": "2026-09-16T00:02:00.096Z",
+    "height": 967201,
+    "block_hash": "00000000000000000000d194fe29cc4e4a2ab4ab64ce3debf1c6fa71f1426b5d",
+    "total_unspendable_sats": "23012033683",
+    "x_post_id": "2100012292532211774"
+  }
 }

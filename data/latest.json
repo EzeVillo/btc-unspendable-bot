@@ -1,9 +1,9 @@
 {
   "last_snapshot": {
-    "cutoff_utc": "2026-09-29T00:01:51.019Z",
-    "height": 969069,
-    "block_hash": "00000000000000000000f68981badff3ed09fe3de9278a032fd6693db9298ceb",
-    "total_unspendable_sats": "23012313362",
-    "x_post_id": "2104723306137968797"
+    "cutoff_utc": "2026-09-30T00:01:12.223Z",
+    "height": 969228,
+    "block_hash": "00000000000000000001616fe9c119f33ac96ac74dc7e144b5dc76b381e0e770",
+    "total_unspendable_sats": "23012315544",
+    "x_post_id": "2105085519520485400"
   }
 }
